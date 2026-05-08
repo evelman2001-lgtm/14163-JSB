@@ -1,13 +1,33 @@
 package com.back.sbb;
 
+import com.back.sbb.Question.Question;
+import com.back.sbb.Question.QuestionRepository;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@ActiveProfiles("test")
 @SpringBootTest
-class sbbApplicationTests {
+class PostRepositoryTests {
+    @Autowired
+    private QuestionRepository questionRepository;
 
     @Test
-    void contextLoads() {
-    }
+    @DisplayName("findAll")
+    void t1() {
+        List<Question> all = questionRepository.findAll();
+        assertEquals(2, all.size());
 
+        Question q = all.get(0);
+        assertEquals("sbb가 무엇인가요?", q.getSubject());
+
+        Question q2 = all.get(0);
+        assertEquals("sbb가 무엇인가요?", q2.getSubject());
+    }
 }
